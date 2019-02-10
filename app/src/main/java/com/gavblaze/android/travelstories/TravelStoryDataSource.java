@@ -38,7 +38,7 @@ public class TravelStoryDataSource extends PageKeyedDataSource<Integer, TravelSt
     @Override
     public void loadBefore(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, TravelStory> callback) {
         ApiClient.getRetrofitInstance().create(ApiEndpointInterface.class)
-                .getTravelStories("travel", API_KEY, ITEMS_PER_PAGE, FIRST_PAGE).enqueue(new Callback<Feed>() {
+                .getTravelStories("travel", API_KEY, ITEMS_PER_PAGE, params.key).enqueue(new Callback<Feed>() {
             @Override
             public void onResponse(Call<Feed> call, Response<Feed> response) {
                 if (response.body() != null) {
@@ -60,7 +60,7 @@ public class TravelStoryDataSource extends PageKeyedDataSource<Integer, TravelSt
     @Override
     public void loadAfter(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, TravelStory> callback) {
         ApiClient.getRetrofitInstance().create(ApiEndpointInterface.class)
-                .getTravelStories("travel", API_KEY, ITEMS_PER_PAGE, FIRST_PAGE).enqueue(new Callback<Feed>() {
+                .getTravelStories("travel", API_KEY, ITEMS_PER_PAGE, params.key).enqueue(new Callback<Feed>() {
             @Override
             public void onResponse(Call<Feed> call, Response<Feed> response) {
                 if (response.body() != null) {
